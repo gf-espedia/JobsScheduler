@@ -1,0 +1,155 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	<Page id="notifDetailPage" title="{i18n>NotificationDetails}" showNavButton="true" navButtonPress="onBackToMain">
+		<content>
+			<ObjectHeader icon="sap-icon://activity-2" title="{Notificat} - {Descript}" backgroundDesign="Solid" fullScreenOptimized="true"
+				class="notifPageHeader">
+				<statuses>
+					<ObjectStatus text="{i18n>PriorityDescription}" state="{path: 'Priority', formatter: '.priorityFormatter'}"/>
+				</statuses>
+				<attributes>
+					<ObjectAttribute id="idRequestedBy" text="{i18n>RequestedBy} {Ernam}"/>
+					<ObjectAttribute id="idRequestedOn" text="{i18n>RequestedOn} {path: 'Erdat', formatter: '.dateFormatter'}"/>
+				</attributes>
+			</ObjectHeader>
+			<VBox id="formBox" class="sapUiSmallMargin" justifyContent="Center">
+				<f:Form id="equiForm" editable="true">
+					<f:title>
+						<core:Title text="{i18n>Equipment}"/>
+					</f:title>
+					<f:layout>
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="1"
+							emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer>
+							<f:formElements>
+								<f:FormElement label="{i18n>Equipment}">
+									<f:fields>
+										<Input value="{Equipment} - {Equidescr}" editable="false" id="equnrInput"/>
+									</f:fields>
+									<!--<f:label>
+												<smartField:SmartLabel labelFor="idEqunr"/>
+											</f:label>
+											<smartField:SmartField value="{Equnr}" id="idEqunr" />-->
+								</f:FormElement>
+								<f:FormElement label="{i18n>FunctionalLocation}">
+									<f:fields>
+										<Input value="{Funcloc} - {Funcldescr}" editable="false"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<l:Splitter >
+					<VBox>
+						<layoutData><l:SplitterLayoutData size="auto"/></layoutData>
+						<f:Form id="problemForm" editable="true">
+							<f:title>
+								<core:Title text="{i18n>Problem}"/>
+							</f:title>
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="1"
+									emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="true"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>Description}">
+											<f:fields>
+												<Input value="{path: 'Descript'}" id="descript" editable="false"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>NotifLongText}">
+											<f:fields>
+												<TextArea value="{path: 'NotifLongText'}" editable="false" growing="true" growingMaxLines="10" width="100%"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>Type}">
+											<f:fields>
+												<Input value="{NotifType}" editable="false"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>Damage}">
+											<f:fields>
+												<Input value="({DamageCodegrp} - {DamageCodegrp}) {DamageCodeDescr} " editable="false"/>
+												<Input value="{DamageText}" placeholder="{i18n>DamageDescr}" editable="false"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>Cause}">
+											<f:fields>
+												<Input value="({CauseCodegrp} - {CauseCode}) {CauseCodeDescr}" editable="false"/>
+												<Input value="{CauseText}" placeholder="{i18n>CauseDescr}" editable="false"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>Priority}">
+											<f:fields>
+												<Input value="{Priority}" editable="false"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>ReportedBy}">
+											<f:fields>
+												<Input value="{Ernam}" editable="false"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>ReportedOn}">
+											<f:fields>
+												<DateTimeInput value="{ path: 'Erdat', formatter: '.dateFormatter'}" type="DateTime" placeholder="dd MMM y, HH:mm" editable="false"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</VBox>
+					<VBox>
+						<layoutData><l:SplitterLayoutData size="50%" resizable="false"/></layoutData>
+						<f:Form id="breakdownForm" editable="true">
+							<f:title>
+								<core:Title text="{i18n>Breakdown}"/>
+							</f:title>
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="1"
+									emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="true"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="Breakdown">
+											<f:fields>
+												<Switch state="{Breakdown}" customTextOn="On" customTextOff="Off" enabled="false" id="idNotBreack">
+													<layoutData>
+														<FlexItemData growFactor="1"/>
+													</layoutData>
+												</Switch>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>MalfunctionStart}" id="formNotMalfStart">
+											<f:fields>
+												<DateTimeInput value="{ path: 'MalfunctionStart', formatter: '.dateFormatter'}" id="msInput" type="DateTime" placeholder="dd MMM y, HH:mm"
+													editable="false"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>MalfunctionEnd}" id="formNotMalfEnd">
+											<f:fields>
+												<DateTimeInput value="{ path: 'MalfunctionEnd', formatter: '.dateFormatter'}" id="meInput" type="DateTime" placeholder="dd MMM y, HH:mm"
+													editable="false"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</VBox>
+				</l:Splitter>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="{i18n>CreateOrder}" type="Accept" press="onCreateOrder"/>
+				<Button text="{i18n>RemoveRequest}" type="Reject" press="onDeleteNotif"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</core:FragmentDefinition>

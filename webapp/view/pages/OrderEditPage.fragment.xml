@@ -1,0 +1,302 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	<Page id="orderEditPage" title="{i18n>editTitle}" showNavButton="true" navButtonPress="onOrderEditCancel">
+		<content>
+			<ObjectHeader id="editPageHeader" responsive="true" icon="sap-icon://eam-work-order" title="{/Order/Orderid} - {/Order/Description}"
+				backgroundDesign="Translucent">
+				<attributes>
+					<ObjectAttribute title="{i18n>CreatedBy}" text="{/Order/CreatedBy} on {path: '/Order/CreatedOn', formatter: '.dateFormatter'}"/>
+					<ObjectAttribute title="{i18n>AssignedTo}" text="{/Order/WorkCenter} - {/Order/WorkCenterDescr}"/>
+				</attributes>
+				<statuses>
+					<ObjectStatus text="{/Order/PriorityDescription}" state="{path: '/Order/Priority', formatter: '.priorityFormatter'}"/>
+				</statuses>
+			</ObjectHeader>
+			<IconTabBar id="iconTabBarEdit" expanded="false" expandable="false" select="onTabSelectChanged">
+				<items>
+					<IconTabFilter id="infoTabEdit" key="info" icon="sap-icon://hint" text="Info">
+						<l:Splitter id="infoFormBoxEdit">
+							<VBox>
+								<layoutData><l:SplitterLayoutData size="auto"/></layoutData>
+								<f:Form id="equiFormOrdEdit" editable="true">
+									<f:title>
+										<core:Title text="{i18n>Equipment}"/>
+									</f:title>
+									<f:layout>
+										<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="1"
+											emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+									</f:layout>
+									<f:formContainers>
+										<f:FormContainer>
+											<f:formElements>
+												<f:FormElement label="Equipment">
+													<f:fields>
+														<Input value="{/Order/Equipment}" required="true" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="handleEquipmentF4"
+															editable="{settingsModel>/Order/ObjEdit}"/>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="Functional Location">
+													<f:fields>
+														<Input value="{/Order/Funcloc}" editable="false"/>
+													</f:fields>
+												</f:FormElement>
+											</f:formElements>
+										</f:FormContainer>
+									</f:formContainers>
+								</f:Form>
+								<f:Form id="problemFormOrdEdit" editable="true">
+									<f:title>
+										<core:Title text="{i18n>Problem}"/>
+									</f:title>
+									<f:layout>
+										<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="1"
+											emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+									</f:layout>
+									<f:formContainers>
+										<f:FormContainer>
+											<f:formElements>
+												<f:FormElement label="Description">
+													<f:fields>
+														<Input value="{/Order/Description}" editable="{settingsModel>/Order/ObjEdit}"/>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="{i18n>NotifLongText}">
+													<f:fields>
+														<TextArea value="{/Order/LongText}" placeholder="Enter Long Text" growing="true" growingMaxLines="10" width="100%"
+															editable="{settingsModel>/Order/ObjEdit}"/>
+													</f:fields>
+													<!--Problem Type da servizio-->
+												</f:FormElement>
+												<f:FormElement label="Type">
+													<f:fields>
+														<Select forceSelection="false" selectedKey="{problType>/results/0/NotifType}" items="{ path: 'problType>/results' }">
+															<core:Item key="{problType>NotifType}" text="{problType>NotifTypeT}"/>
+														</Select>
+													</f:fields>
+												</f:FormElement>
+												<!--f:FormElement label="Type">
+													<f:fields>
+														<Select id="typeSelectEdit" enabled="{settingsModel>/Order/ObjEdit}">
+															<core:Item key="M1" text="PM Request"/>
+															<core:Item key="M2" text="Malfunction Report"/>
+														</Select>
+													</f:fields>
+												</f:FormElement-->
+											</f:formElements>
+										</f:FormContainer>
+									</f:formContainers>
+								</f:Form>
+							</VBox>
+							<VBox>
+								<layoutData><l:SplitterLayoutData size="50%" resizable="false"/></layoutData>
+								<f:Form id="notifFormOrdEdit">
+									<f:title>
+										<core:Title text="{i18n>Notification}"/>
+									</f:title>
+									<f:layout>
+										<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
+											emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+									</f:layout>
+									<f:formContainers>
+										<f:FormContainer>
+											<f:formElements>
+												<f:FormElement label="Notification Number">
+													<f:fields>
+														<Label text="{path: '/Order/Notificat'}"/>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="Description">
+													<f:fields>
+														<Label text="{path: '/Order/NotifDescript'}"/>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="{i18n>NotifLongText}">
+													<f:fields>
+														<Label text="{/Order/NotifLongText}"/>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="Reported By">
+													<f:fields>
+														<Label text="{path: '/Order/Ernam'}"/>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="Reported On">
+													<f:fields>
+														<Label text="{path: '/Order/Erdat', formatter: '.dateFormatter'}"/>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="Damage">
+													<f:fields>
+														<Label text="{/Order/Damage}"/>
+														<Label text="{/Order/DamageText}"/>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="Cause">
+													<f:fields>
+														<Label text="{/Order/Cause}"/>
+														<Label text="{/Order/CauseText}"/>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="Breakdown">
+													<f:fields>
+														<Switch state="{/Order/Breakdown}" customTextOn="On" customTextOff="Off" change="bdSwitchChangeEdit" enabled="false">
+															<layoutData>
+																<FlexItemData growFactor="1"/>
+															</layoutData>
+														</Switch>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="Malfunction Start" id="formEditMalfStart">
+													<f:fields>
+														<Label text="{path: '/Order/MalfunctionStart', formatter: '.dateFormatter'}"/>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="Malfunction End" id="formEditMalfEnd">
+													<f:fields>
+														<Label text="{path: '/Order/MalfunctionEnd', formatter: '.dateFormatter'}"/>
+													</f:fields>
+												</f:FormElement>
+											</f:formElements>
+										</f:FormContainer>
+									</f:formContainers>
+								</f:Form>
+							</VBox>
+						</l:Splitter>
+					</IconTabFilter>
+					<IconTabSeparator icon=""/>
+					<IconTabFilter id="planningTabEdit" key="planning" icon="sap-icon://activity-assigned-to-goal" text="{i18n>Planning}">
+						<f:Form id="planningFormOrdEdit" editable="true">
+							<f:title>
+								<core:Title text="{i18n>Planning}"/>
+							</f:title>
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="1"
+									emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="Planned Date">
+											<f:fields>
+												<DatePicker id="PlDateEdit"
+													value="{path: '/Order/PlannedDate', type : 'sap.ui.model.odata.type.DateTime', constraints : {displayFormat : 'Date'}}"
+													placeholder="Enter Date" editable="{settingsModel>/Order/ObjEdit}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Priority">
+											<f:fields>
+												<Select id="prioritySelectEdit" enabled="{settingsModel>/Order/ObjEdit}">
+													<core:Item key="4" text="{i18n>Low}"/>
+													<core:Item key="3" text="{i18n>Medium}"/>
+													<core:Item key="2" text="{i18n>High}"/>
+													<core:Item key="1" text="{i18n>VeryHigh}"/>
+												</Select>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Work Center">
+											<f:fields>
+												<Input value="{/Order/WorkCenter}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="handleWcF4"
+													editable="{settingsModel>/Order/ObjEdit}"/>
+												<Input value="{/Order/Werks} - {/Order/WorkCenterDescr}" editable="false"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</IconTabFilter>
+					<IconTabSeparator icon=""/>
+					<IconTabFilter id="tasksTabEdit" key="tasks" icon="sap-icon://task" text="{i18n>Tasks}">
+						<Table id="operationsTableEdit" items="{ path: '/Operations', sorter: { path: 'Activity' } }" inset="false">
+							<headerToolbar>
+								<Toolbar>
+									<content>
+										<Title text="{i18n>Operations}" level="H2"/>
+										<ToolbarSpacer/>
+										<Button id="OperAdd" text="{i18n>AddOperation}" icon="sap-icon://add" press="onOperationAdd" visible="{settingsModel>/Order/ObjVisib}"></Button>
+									</content>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="10%"></Column>
+								<Column minScreenWidth="Tablet" demandPopin="true">
+									<Text text="{i18n>Operation}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true" width="20%">
+									<Text text="{i18n>ActH}"/>
+								</Column>
+								<!--<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="Activity Type"/>
+								</Column>-->
+								<Column demandPopin="true" width="10%" visible="{settingsModel>/Order/ObjVisib}"></Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<Input id="OperActColumn" value="{path: 'Activity'}" editable="{settingsModel>/Order/ObjEdit}"/>
+									<Input id="OperDescColumn" value="{path: 'Description'}" editable="{settingsModel>/Order/ObjEdit}"/>
+									<Input id="OperDuratColumn" value="{path: 'DurationNormal'}" editable="{settingsModel>/Order/ObjEdit}"/>
+									<!--<Input value="{path: 'Acttype'}"/>-->
+									<Button id="OperDelete" icon="sap-icon://sys-cancel" type="Transparent" press="removeOperationFromTable"
+										visible="{settingsModel>/Order/ObjVisib}"></Button>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+					<IconTabSeparator icon=""/>
+					<IconTabFilter id="componentsTabEdit" key="components" icon="sap-icon://wrench" text="Components">
+						<Table id="componentsTableEdit" items="{/Components}" inset="false">
+							<headerToolbar>
+								<Toolbar>
+									<content>
+										<Title text="{i18n>Components}" level="H2"/>
+										<ToolbarSpacer/>
+										<Button text="{i18n>AddComponent}" icon="sap-icon://add" press="onComponentAdd" visible="{settingsModel>/Order/ObjVisib}"></Button>
+									</content>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column minScreenWidth="Tablet" demandPopin="true">
+									<Text text="{i18n>Component}"/>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true"></Column>
+								<Column minScreenWidth="Desktop" demandPopin="true" vAlign="Middle">
+									<Text text="{i18n>ReqQty}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true" vAlign="Middle">
+									<Text text="{i18n>Unit}"/>
+								</Column>
+								<Column vAlign="Middle">
+									<Text text="{i18n>Operation}"/>
+								</Column>
+								<Column vAlign="Middle" width="10%" visible="{settingsModel>/Order/ObjVisib}"></Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<Input value="{Material}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="handleMaterialF4" valueLiveUpdate="true"
+										editable="{settingsModel>/Order/ObjEdit}"/>
+									<Input value="{MatlDesc}" editable="false"/>
+									<Input value="{RequirementQuantity}" editable="{settingsModel>/Order/ObjEdit}"/>
+									<Input value="{RequirementQuantityUnit}" editable="false"/>
+									<!--Input value="{Activity}"/!-->
+									<ComboBox showSecondaryValues="true" items="{ path: '/Operations', sorter: { path: 'Activity' } }" selectedKey="{Activity}"
+										editable="{settingsModel>/Order/ObjEdit}">
+										<core:ListItem key="{Activity}" text="{Activity}" additionalText="{Description}"/>
+									</ComboBox>
+									<Button icon="sap-icon://sys-cancel" type="Transparent" press="removeComponentFromTable" visible="{settingsModel>/Order/ObjVisib}"></Button>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<Toolbar>
+				<Button text="{i18n>PlanningCalendar}" press="openCalendar" type="Emphasized" icon="sap-icon://calendar"></Button>
+				<ToolbarSpacer/>
+				<Button text="{i18n>Save}" press="onOrderEditSave" type="Emphasized" visible="{settingsModel>/Order/ObjVisib}"></Button>
+				<Button id="orderReleaseButton" text="{i18n>SaveRel}" press="onOrderEditRelease" type="Accept"></Button>
+				<Button text="{i18n>Cancel}" press="onOrderEditCancel"></Button>
+			</Toolbar>
+		</footer>
+	</Page>
+</core:FragmentDefinition>

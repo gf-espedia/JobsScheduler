@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog  id="wcDialog" title="WorkCenters" class="sapUiPopupWithPadding" items="{/WcSearchHelpSet}" search="_handleWcHelpSearch"
+		confirm="_handleWcHelpClose" cancel="_handleWcHelpClose">
+		<StandardListItem iconInset="false" title="{Arbpl}" description="{Ktext}" info="{Werks}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

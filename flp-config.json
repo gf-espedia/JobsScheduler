@@ -1,0 +1,34 @@
+{
+    "application": {
+        "id": "",
+        "title": "com.espedia.demo.JobsScheduler.JobsScheduler",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#JobsScheduler-Display",
+        "navigationComponentName": "com.espedia.demo.JobsScheduler",
+        "intentSemanticObject": "JobsScheduler",
+        "intentAction": "Display",
+        "html5ApplicationName": "jobsscheduler",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "3578a01c-8bec-44ba-9c8e-13bfea4efba1-1528983183698"
+        ],
+        "contentPackages": [
+            "bf3cb186-c4e0-4452-82d6-bde1d6b3d7c0-1528968411623"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Maintenance Notifications",
+        "subtitle": "Job Scheduler",
+        "searchKeywords": "Maintenance Notifications,Job Scheduler",
+        "displayIconUrl": "sap-icon://approvals",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}

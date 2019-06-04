@@ -1,0 +1,133 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"id": "com.espedia.demo.JobsScheduler",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"Z_PM_GW_SERVICE_SRV": {
+				"uri": "/sap/opu/odata/sap/Z_PM_GW_SERVICE_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize",
+			"sap_belize_plus"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "com.espedia.demo.JobsScheduler.view.MainView",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.layout": {},
+				"sap.ui.core": {},
+				"sap.m": {},
+				"openui5.camera": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "com.espedia.demo.JobsScheduler.i18n.i18n"
+				}
+			},
+			"": {
+				"uri": "/sap/opu/odata/sap/Z_PM_GW_SERVICE_SRV/",
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"metadataUrlParams": {
+						"sap-documentation": "heading",
+						"sap-language": "en"
+					},
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request",
+					"defaultUpdateMethod": "PUT"
+				},
+				"dataSource": "Z_PM_GW_SERVICE_SRV",
+				"preload": true
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"resourceRoots": {
+			"openui5.camera": "./utils/openui5/camera/"
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "com.espedia.demo.JobsScheduler.view",
+				"controlAggregation": "pages",
+				"controlId": "idAppControl",
+				"clearControlAggregation": false
+			},
+			"routes": [
+				{
+					"name": "RouteMainView",
+					"pattern": "RouteMainView",
+					"target": [
+						"TargetMainView"
+					]
+				}
+			],
+			"targets": {
+				"TargetMainView": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewName": "MainView"
+				}
+			}
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	}
+}

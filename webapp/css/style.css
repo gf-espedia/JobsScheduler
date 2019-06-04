@@ -1,0 +1,24 @@
+/* Enter your custom styles here */
+
+/*@media (min-width: 1250px) {
+	.sapMShellCentralBox {
+		width: 100%!important;
+		margin-left: -50%!important;
+	}
+}*/
+
+.notifPageHeader .sapUiIcon {
+	color: #fabd64!important;
+}
+
+.createOrderPageHeader .sapUiIcon {
+	color: #fabd64!important;
+}
+
+.openOrderPageHeader .sapUiIcon {
+	color: #91c8f6!important;
+}
+
+.scheduledOrderPageHeader .sapUiIcon {
+	color: #abe2ab!important;
+}

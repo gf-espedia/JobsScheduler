@@ -1,0 +1,205 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Page title="{i18n>title}" id="mainPage">
+		<content>
+			<IconTabBar expandable="false" id="idIconTabBar" select="handleIconTabBarSelect" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="mainNotifTabFilter" icon="sap-icon://request" text="Notifications" key="notif" design="Horizontal" iconColor="Critical">
+						<Table id="notifTable" inset="false"
+							items="{path: '/NotifSet', filters : [ { path:'SStatus', operator: 'NE', value1:'I0072'}, { path:'OrderNo', operator: 'EQ', value1:'NO_ORDER'}], sorter: { path : 'Notificat', descending: true } }"
+							growing="true" growingThreshold="20" mode="SingleSelectMaster" selectionChange="notifSelect">
+							<headerToolbar>
+								<Toolbar>
+									<content>
+										<Title text="{i18n>Notifications}" level="H2"/>
+										<ToolbarSpacer/>
+										<Button text="{i18n>refresh}" icon="sap-icon://synchronize" press="refreshNotif"/>
+									</content>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column hAlign="Right" demandPopin="true" vAlign="Middle">
+									<Text text="Notif. No."/>
+								</Column>
+								<Column hAlign="Left" demandPopin="true" width="20%" vAlign="Middle"></Column>
+								<Column demandPopin="true" vAlign="Middle">
+									<Text text="Notif. Date"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true" vAlign="Middle">
+									<Text text="Reported By"/>
+								</Column>
+								<Column demandPopin="true" hAlign="Right" vAlign="Middle">
+									<Text text="Equipment"/>
+								</Column>
+								<Column hAlign="Left" vAlign="Middle"></Column>
+								<Column hAlign="Right" vAlign="Middle">
+									<Text text="Damage"/>
+								</Column>
+								<Column hAlign="Left" vAlign="Middle"></Column>
+								<Column hAlign="Right" vAlign="Middle">
+									<Text text="Cause"/>
+								</Column>
+								<Column hAlign="Left" vAlign="Middle"></Column>
+								<Column width="10%" vAlign="Middle" hAlign="Right">
+									<Text text="Note"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem vAlign="Middle" type="Navigation">
+									<ObjectIdentifier title="{Notificat}"/>
+									<Label text=" {Descript}"/>
+									<Label text="{ path: 'Notifdate', formatter: '.dateFormatterShort'}"/>
+									<Label text="{Ernam}"/>
+									<ObjectIdentifier title="{Equipment}"/>
+									<Label text="{Equidescr}"/>
+									<Label text="{DamageCode} "/>
+									<HBox>
+										<Link text="{DamageCodeDescr}" press="showDamageText" visible="{path: 'DamageText', formatter: '.linkEnableFormat'}"/>
+										<Label text="{DamageCodeDescr}" visible="{path: 'DamageText', formatter: '.linkEnableFormatInverse'}"/>
+									</HBox>
+									<Label text="{CauseCode} "/>
+									<HBox>
+										<Link text="{CauseCodeDescr}" press="showCauseText" visible="{path: 'CauseText', formatter: '.linkEnableFormat'}" wrapping="true"/>
+										<Label text="{CauseCodeDescr}" visible="{path: 'CauseText', formatter: '.linkEnableFormatInverse'}" wrapping="true"/>
+									</HBox>
+									<Button icon="sap-icon://notes" press="showNotifLongText" visible="{path: 'NotifLongText', formatter: '.linkEnableFormat'}"
+										type="Transparent"/>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+					<IconTabSeparator icon="sap-icon://process"/>
+					<IconTabFilter id="mainOpenOrdersTabFilter" icon="sap-icon://approvals" design="Horizontal" text="{i18n>OpenOrders}" key="oorders">
+						<Table id="openOrderTable"
+							items="{path: '/OrderSet', filters : [ { path:'SstatusInternal', operator: 'EQ', value1:'OPEN'} ], sorter : { path : 'Orderid', descending: true } }"
+							mode="SingleSelectMaster" selectionChange="openOrderSelect" growing="true" growingThreshold="20">
+							<headerToolbar>
+								<Toolbar>
+									<content>
+										<Title text="{i18n>OpenOrders}" level="H2"/>
+										<ToolbarSpacer/>
+										<Button text="{i18n>refresh}" icon="sap-icon://synchronize" press="refreshOpenOrder"/>
+									</content>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column hAlign="Right" demandPopin="true">
+									<Text text="Order"/>
+								</Column>
+								<Column hAlign="Left" demandPopin="true" width="20%"></Column>
+								<Column demandPopin="true">
+									<Text text="{i18n>CreatedOn}"/>
+								</Column>
+								<Column demandPopin="true">
+									<Text text="{i18n>CreatedBy}"/>
+								</Column>
+								<Column demandPopin="true">
+									<Text text="Type"/>
+								</Column>
+								<Column hAlign="Right" demandPopin="true">
+									<Text text="{i18n>Equipments}"/>
+								</Column>
+								<Column hAlign="Left" demandPopin="true"></Column>
+								<Column hAlign="Right" vAlign="Middle">
+									<Text text="{i18n>Damage}"/>
+								</Column>
+								<Column hAlign="Left" vAlign="Middle"></Column>
+								<Column hAlign="Right" vAlign="Middle">
+									<Text text="{i18n>Cause}"/>
+								</Column>
+								<Column hAlign="Left" vAlign="Middle"></Column>
+								<Column>
+									<Text text="{i18n>Notification}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem vAlign="Middle" type="Navigation">
+									<ObjectIdentifier title="{Orderid}"/>
+									<Label text="{ShortText}"/>
+									<Label text="{ path: 'EnterDate', formatter: '.dateFormatterShort'}"/>
+									<Label text="{EnteredBy}"/>
+									<Label text="{OrderType}"/>
+									<ObjectIdentifier title="{Equipment}"/>
+									<Label text="{Equidescr}"/>
+									<Label text="{DamageCode} "/>
+									<HBox>
+										<Link text="{DamageCodeDescr}" press="showDamageText" visible="{path: 'DamageText', formatter: '.linkEnableFormat'}"/>
+										<Text text="{DamageCodeDescr}" visible="{path: 'DamageText', formatter: '.linkEnableFormatInverse'}"/>
+									</HBox>
+									<Label text="{CauseCode} "/>
+									<HBox>
+										<Link text="{CauseCodeDescr}" press="showCauseText" visible="{path: 'CauseText', formatter: '.linkEnableFormat'}"/>
+										<Text text="{CauseCodeDescr}" visible="{path: 'CauseText', formatter: '.linkEnableFormatInverse'}"/>
+									</HBox>
+									<Label text="{NotifNo}"/>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+					<IconTabSeparator icon="sap-icon://process"/>
+					<IconTabFilter id="mainRelOrdersTabFilter" icon="sap-icon://eam-work-order" design="Horizontal" text="Scheduled Orders" key="sorders"
+						iconColor="Positive">
+						<Table id="releasedOrderTable"
+							items="{path: '/OrderSet', filters : [ { path:'SstatusInternal', operator: 'EQ', value1:'RELEASED'} ] , sorter: { path : 'Orderid', descending: true } }"
+							growing="true" growingThreshold="20" mode="SingleSelectMaster" selectionChange="releasedOrderSelect">
+							<headerToolbar>
+								<Toolbar>
+									<content>
+										<Title text="Scheduled Orders" level="H2"/>
+										<ToolbarSpacer/>
+										<Button text="{i18n>refresh}" icon="sap-icon://synchronize" press="refreshReleasedOrder"/>
+									</content>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column hAlign="Right" demandPopin="true">
+									<Text text="Order"/>
+								</Column>
+								<Column hAlign="Left" demandPopin="true" width="20%"></Column>
+								<Column demandPopin="true">
+									<Text text="{i18n>CreatedOn}"/>
+								</Column>
+								<Column demandPopin="true">
+									<Text text="{i18n>CreatedBy}"/>
+								</Column>
+								<Column demandPopin="true">
+									<Text text="Type"/>
+								</Column>
+								<Column hAlign="Right" demandPopin="true">
+									<Text text="{i18n>Equipment}"/>
+								</Column>
+								<Column hAlign="Left" demandPopin="true"></Column>
+								<Column>
+									<Text text="Assigned To"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>Notification}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>PlannedDate}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>Status}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem vAlign="Middle" type="Navigation">
+									<ObjectIdentifier title="{Orderid}"/>
+									<Label text="{ShortText}"/>
+									<Label text="{ path: 'EnterDate', formatter: '.dateFormatterShort'}"/>
+									<Label text="{EnteredBy}"/>
+									<Label text="{OrderType}"/>
+									<ObjectIdentifier title="{Equipment}"/>
+									<Label text="{Equidescr}"/>
+									<Label text="{MnWkCtr}"/>
+									<Label text="{NotifNo}"/>
+									<Label text="{ path: 'StartDate', formatter: '.dateFormatterShort'}"/>
+									<Text text="{UstatusDescr}"/>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+	</Page>
+</core:FragmentDefinition>

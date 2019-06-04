@@ -1,0 +1,12 @@
+<mvc:View controllerName="com.espedia.demo.JobsScheduler.controller.MainView" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<App id="idAppControl">
+		<pages>
+			<core:Fragment fragmentName="com.espedia.demo.JobsScheduler.view.pages.MainPage" type="XML"/>
+			<core:Fragment fragmentName="com.espedia.demo.JobsScheduler.view.pages.NotifDetailPage" type="XML"/>
+			<core:Fragment fragmentName="com.espedia.demo.JobsScheduler.view.pages.OrderCreatePage" type="XML"/>
+			<core:Fragment fragmentName="com.espedia.demo.JobsScheduler.view.pages.OrderEditPage" type="XML"/>
+			<core:Fragment fragmentName="com.espedia.demo.JobsScheduler.view.pages.Camera" type="XML"/>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover  title="{Notificat} - Long Text" class="sapUiPopupWithPadding" placement="Left" initialFocus="action" contentWidth="30%">
+		<VBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginTopBottom" >
+			<Text text="{NotifLongText}"/>
+		</VBox>
+	</Popover>
+</core:FragmentDefinition>

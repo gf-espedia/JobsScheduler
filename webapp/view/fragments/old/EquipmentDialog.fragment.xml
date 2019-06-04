@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog  id="equiDialog" title="Equipments" class="sapUiPopupWithPadding" items="{/EquiSearchHelpSet}" search="_handleEquiHelpSearch"
+		confirm="_handleEquiHelpClose" cancel="_handleEquiHelpClose">
+		<StandardListItem iconInset="false" title="{Equnr}" description="{Eqktu}"/>
+	</SelectDialog>
+</core:FragmentDefinition>
