@@ -14,7 +14,7 @@ sap.ui.define([
 ], function (BaseController, MessageBox, jQuery, UploadCollectionParameter, MessageToast, MobileLibrary, FileSizeFormat, Filter,
 	FilterOperator, JSONModel) {
 	"use strict";
-
+ 
 	return BaseController.extend("com.espedia.demo.JobsScheduler.controller.MainView", {
 		uploadJSON: {},
 		PhotoNumberAttach: 0,
